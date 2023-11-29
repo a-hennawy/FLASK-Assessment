@@ -1,20 +1,47 @@
-from forex_python.converter import CurrencyRates
+from forex_python.converter import CurrencyRates, Decimal, CurrencyCodes, RatesNotAvailableError
 
-c = CurrencyRates()
+currency = CurrencyRates()
+symbol = CurrencyCodes() 
+
 
 class CurrencyConverter:
 
     def __init__(self):
         self.curr_list = []
-        curr_dict = c.get_rates('USD')
+        curr_dict = currency.get_rates('USD')
         curr_dict['USD'] = 0
         for curr in curr_dict.keys():
             self.curr_list.append(curr)
 
-    def convert_curr(self,con_from, con_to,amount):
-        self.con_from = con_from
-        self.con_to = con_to
+    def convert_curr(self,convert_from, convert_to,amount):
+        self.convert_from = convert_from
+        self.convert_to = convert_to
         self.amount = amount
-        rate = c.convert(self.con_from, self.con_to, self.amount)
-        return round(rate,2)
+
+        conversion = currency.convert(self.convert_from, self.convert_to,
+                                Decimal(self.amount))
+        return round(conversion,2)
     
+    def generate_symbol(self, currency_code):
+        curr_symbol = symbol.get_symbol(currency_code)
+        return curr_symbol
+    
+    # def entry_validity(self,convert_from, convert_to):
+
+    #     if convert_from not in self.curr_list:
+    #         if convert_to not in self.curr_list:
+    #             return (f"Invalid currency code {convert_from} and {convert_to}.")
+                           
+    #     elif convert_to not in self.curr_list:
+    #             return (f"Invalid currency code {convert_to}.")
+        # elif not isinstance(amount, int):
+        #     return (f"invalid amount of {amount}")
+        
+
+        # if convert_to not in self.curr_list:
+        #     return (f"Invalid currency code {convert_to}")
+        # if amount == False:
+        #     return (f"Invalid amount {amount}")
+            
+
+         

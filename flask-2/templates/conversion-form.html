@@ -1,0 +1,27 @@
+{%extends 'base.html'%} {%block title%}Convert Any Currency!{%endblock%} {%block
+content%}
+<form action="/converted" method="post">
+  <label for="from-currency" class="from">Convert from:</label>
+  <input
+    type="text"
+    placeholder="Enter currency code"
+    name="from-curr"
+    class="from-currency"
+    id="from"
+  />
+  <br />
+  <label for="to-curr">Convert to:</label>
+  <input
+    type="text"
+    placeholder="Enter currency code"
+    name="to-curr"
+    class="to-curr"
+    id="to"
+  />
+  <br />
+  <label for="amount">Amount:</label>
+  <input type="text" placeholder="Enter amount" name="amount" id="amount" />
+  <br />
+  <button class="btn">Convert</button>
+</form>
+{%endblock%}
