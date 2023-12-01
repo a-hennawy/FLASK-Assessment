@@ -12,6 +12,13 @@ class ConverterTestCase(TestCase):
         result = c.generate_symbol("USD")
         self.assertEqual(result,'$')
 
-    # def test_entry_validity(self):
-    #     result1 = c.entry_validity('USDd', 'EUW')
-    #     self.assertEqual(result1, "Invalid currency code {convert_from} and {convert_to}.")
+class TestApp(TestCase):
+    def test_converted(self):
+        with app.test_client() as client:
+            response = client.post('/converted', data = {'from-curr':'USD', 'to_curr':'EUR', 'amount':'10'})
+            html = response.get_data(as_text=True)
+
+            # self.assertIn('<h1>EZ Convert</h1>', html)
+            # self.assertEqual(response.status_code, 200)
+            # print(response.text)
+            

@@ -26,22 +26,7 @@ class CurrencyConverter:
         curr_symbol = symbol.get_symbol(currency_code)
         return curr_symbol
     
-    # def entry_validity(self,convert_from, convert_to):
 
-    #     if convert_from not in self.curr_list:
-    #         if convert_to not in self.curr_list:
-    #             return (f"Invalid currency code {convert_from} and {convert_to}.")
-                           
-    #     elif convert_to not in self.curr_list:
-    #             return (f"Invalid currency code {convert_to}.")
-        # elif not isinstance(amount, int):
-        #     return (f"invalid amount of {amount}")
-        
-
-        # if convert_to not in self.curr_list:
-        #     return (f"Invalid currency code {convert_to}")
-        # if amount == False:
-        #     return (f"Invalid amount {amount}")
             
 
          

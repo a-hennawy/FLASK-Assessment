@@ -16,20 +16,25 @@ def home_page():
 def converted():
     from_currency = request.form['from-curr']
     to_currency = request.form['to-curr']
-
+    amount = request.form['amount']
     
     try:
-        amount = int(request.form['amount'])
+       amount = int(request.form['amount'])
     except ValueError as exc:
-        flash(f"{exc} is not a valid amount")
-        return redirect("/home")
+       
+        err = str(exc)
+        if amount in err:
+            flash(f"{amount} is not a valid amount")
+            return redirect("/home")
     
-
-    try:
-        convert = curr_convert.convert_curr(from_currency, to_currency, amount)
-    except RatesNotAvailableError as exc:
-        flash("Currency code invalid")
+    if from_currency.upper() not in curr_convert.curr_list:
+        flash(f"{from_currency} is not valid")
         return redirect("/home")
+    if to_currency.upper() not in curr_convert.curr_list:
+        flash(f"{to_currency} is not valid")
+        return redirect("/home")
+
+    convert = curr_convert.convert_curr(from_currency.upper(), to_currency.upper(), amount)    
     currency_symbol = curr_convert.generate_symbol(to_currency)
     try:
         return render_template('successful.html', converted = str(convert), 
